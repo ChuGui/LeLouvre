@@ -1,0 +1,60 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Accueil{% endblock %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+
+{% endblock %}
+
+{% block body %}
+    {% block header %} Accueil {% endblock %}
+    <br>
+    <div class="danger alert-danger">
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+
+            <span>{{ flashMessage }}Il ne reste plus que {{ remainingTicket }} billet(s) disponible(s) pour cette journée.</span>
+
+        {% endfor %}
+    </div>
+    <br>
+    <div class="well">
+        {{ form_start(formBooking, {'attr' : {'class' : 'form-inline', 'novalidate': 'novalidate'}}) }}
+        {{ form_row(formBooking.visitingDay, {'attr': {'id' : 'datepicker', 'name' : 'datepicker'}}) }}
+        <br>
+        <span id="infoNbTicket" class="alert alert-info fade in">Hello</span>
+        {{ form_row(formBooking.halfday) }}
+        <div class="well" id="ticketsForm" data-prototype="{{ form_widget(formBooking.tickets.vars.prototype)| e }}">
+            {% for ticket in formBooking.tickets %}
+                <div id="ticket-{{ loop.index0 }}">
+                    <h3>Billet n° {{ loop.index }}</h3>
+                    {{ form_widget(ticket) }}
+
+                </div>
+            {% endfor %}
+        </div>
+        <a href="#" id="add_ticket" class="btn btn-default">Ajouter un billet</a>
+        {% do formBooking.url.setRendered %}
+        {% do formBooking.lastnameBooking.setRendered %}
+        {% do formBooking.firstnameBooking.setRendered %}
+        {{ form_end (formBooking) }}
+    </div>
+
+{% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script type="text/javascript" src="{{ asset('bundles/louvreTicket/js/datepickerLouvre.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/louvreticket/js/addTicket.js') }}"></script>
+        {#<script type="text/javascript" src="{{ asset('bundles/louvreticket/js/nbTicketsAvailable.js') }}"></script>#}
+
+    {% endblock %}
+
+
+
+
+

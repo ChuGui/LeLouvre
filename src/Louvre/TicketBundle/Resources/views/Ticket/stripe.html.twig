@@ -1,0 +1,56 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Stripe{% endblock %}
+
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('bundles/louvreticket/css/bookingStripe.css') }}" type="text/css"/>
+    {% endblock %}
+
+    {% block header %} STRIPE {% endblock %}
+
+{% block body %}
+
+    <div class="well">
+        <div class="container-fluid">
+            <h1><span>Projet Stripe</span> Paiement sécurisé</h1>
+
+            {{ form_start(formBooking)}}
+
+            {{ form_row(formBooking.lastnameBooking) }}
+            {{ form_row(formBooking.firstnameBooking) }}
+
+            <script
+                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="pk_test_lvefCuTVu1SQoYPdJO57yFYv"
+                    data-amount="999"
+                    data-name="ChuGu"
+                    data-description="Widget"
+                    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                    data-locale="auto"
+                    data-zip-code="false"
+                    data-value="payer avec carte"
+            >
+            </script>
+            {% do formBooking.url.setRendered %}
+            {% do formBooking.tickets.setRendered %}
+            {% do formBooking.halfday.setRendered %}
+            {% do formBooking.visitingDay.setRendered %}
+            {% do formBooking.next.setRendered %}
+            {{ form_end (formBooking) }}
+
+        </div>
+
+
+    </div>
+{% endblock %}
+
+
+
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+        <script type="text/javascript" src="{{ asset('bundles/louvreticket/js/bookingStripe.js') }}"></script>
+    {% endblock %}
+

@@ -1,0 +1,21 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Recap{% endblock %}
+    {% block header %} Recap {% endblock %}
+{% block body %}
+
+
+    <div id="container">
+        {% for flash_message in app.session.flashBag.get('success') %}
+            <div class="alert alert-success">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        <ul>
+            <li>Validation de paiement avec résumé</li>
+            <li>envois email avec billets SwiftMailer</li>
+        </ul>
+
+    </div>
+{% endblock %}
+
