@@ -8,6 +8,7 @@
 
     {% block stylesheets %}
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/louvreTicket/css/layout.css') }}">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     {% endblock %}
@@ -15,22 +16,36 @@
 </head>
 
 <body>
-<div class="container">
-    <div id="header" class="jumbotron">
-        <h1>Voici mon header:  {% block header %} {% endblock %}</h1>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" id="navbar">
+    <div class="container">
+        <div class="navbar-header col-md-3" id="navbar-header">
+            <a class="navbar-brand" href="{{ path('louvre_ticket_homepage') }}" id="logo">Le Louvre</a>
+        </div>
+        <div id="balises" class="container col-md-8">
+            <ul class="nav nav-pills" role="tablist">
+                <li role="presentation" class="col-md-3" id="selectionBalise"><a href="{{ path('louvre_ticket_homepage') }}"><span class="badge">1</span> Selection des billets  </a></li>
+                <li><span class="glyphicon glyphicon-triangle-right" style="color: white"></span></li>
+                <li role="presentation" id="paiementBalise" class="col-md-3" style="pointer-events: none;cursor: default;" ><a href="#"><span class="badge">2</span> Paiement</a></li>
+                <li><span class="glyphicon glyphicon-triangle-right" style="color: white"></span></li>
+                <li role="presentation" class="col-md-3" id="confirmationBalise" style="pointer-events: none;cursor: default;"><a href="#"> <span class="badge">3</span> Confirmation</a></li>
+            </ul>
+        </div>
     </div>
-    <div id="content" class="col-md-9">
-        {% block body %}
-        {% endblock %}
-    </div>
+</nav>
+
+
+<div id="content">
+
+    {% block body %}
+
+    {% endblock %}
 </div>
 
 <hr>
-
 <footer>
     <h1>Footer.</h1>
 </footer>
-</div>
 
 {% block javascripts %}
 

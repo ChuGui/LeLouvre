@@ -66,6 +66,13 @@ class Booking
     private $visitingDay;
 
     /**
+     * @var \Booloean
+     *
+     * @ORM\Column(name="halfDay", type="boolean")
+     */
+    private $halfday;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="buyingDay", type="datetime")
@@ -300,5 +307,29 @@ class Booking
     public function getTickets()
     {
         return $this->tickets;
+    }
+
+    /**
+     * Set halfday
+     *
+     * @param boolean $halfday
+     *
+     * @return Booking
+     */
+    public function setHalfday($halfday)
+    {
+        $this->halfday = $halfday;
+
+        return $this;
+    }
+
+    /**
+     * Get halfday
+     *
+     * @return boolean
+     */
+    public function getHalfday()
+    {
+        return $this->halfday;
     }
 }

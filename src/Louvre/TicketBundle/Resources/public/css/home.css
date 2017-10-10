@@ -1,0 +1,27 @@
+#infoNbTicket
+{
+    float: right;
+}
+
+div > label
+{
+    margin-right: 50px;
+}
+.formElements
+{
+    margin-bottom: 60px;
+}
+
+.formDiscount {
+    margin-top: 140px;
+    margin-left: 18px;
+}
+
+.topForm
+{
+    margin-bottom: 50px;
+}
+#formWell
+{
+    padding-bottom: 50px;
+}

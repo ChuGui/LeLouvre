@@ -66,6 +66,13 @@ class Booking
     private $visitingDay;
 
     /**
+     * @var \Booloean
+     *
+     * @ORM\Column(name="halfDay", type="boolean")
+     */
+    private $halfday;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="buyingDay", type="datetime")
@@ -259,5 +266,46 @@ class Booking
     {
         return $this->buyingDay;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tickets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add ticket
+     *
+     * @param \Louvre\TicketBundle\Entity\Ticket $ticket
+     *
+     * @return Booking
+     */
+    public function addTicket(\Louvre\TicketBundle\Entity\Ticket $ticket)
+    {
+        $this->tickets[] = $ticket;
+        $ticket->setBooking($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove ticket
+     *
+     * @param \Louvre\TicketBundle\Entity\Ticket $ticket
+     */
+    public function removeTicket(\Louvre\TicketBundle\Entity\Ticket $ticket)
+    {
+        $this->tickets->removeElement($ticket);
+    }
+
+    /**
+     * Get tickets
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
+    }
+}

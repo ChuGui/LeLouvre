@@ -1,0 +1,45 @@
+div#planning {
+    width:730px; /* par essai et erreurs, le datepicker ne tient pas compte des div parents. */
+    padding:12px;
+    text-align:left;
+}
+div#planning div#titre {
+    margin-bottom:12px;
+    text-align:center;
+    font-weight:bold;
+}
+div#planning div#datepicker {
+    font-size:1.1em; /* datepicker interprète la largeur à sa façon ! */
+}
+div#planning div#affiche {
+    margin-top:12px;
+    text-align:center;
+    font-weight:bold;
+}
+
+/* Dialogues */
+
+div.dialog {
+    font-size:0.9em;
+}
+div.dialog p {
+    margin:6px;
+}
+
+/* Couleurs de dates */
+
+.important {
+    background-color:#FF0000;
+    /* pour les réunions */
+    /* modifie le td, ce qui provoque un effet de bordure autour de la date choisie */
+    /* sert de marqueur pour color:#FF0000; */
+}
+.lundiMercredi {
+    /* pour les lundis et les mercredis */
+    /* rien, sert de marqueur pour color:#33CC00; */
+}
+.reserver {
+
+    /* pour réserver la salle des jeux */
+    /* rien, sert de marqueur pour color:#0033CC; */
+}
