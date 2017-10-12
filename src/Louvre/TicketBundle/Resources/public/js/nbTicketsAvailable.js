@@ -1,4 +1,4 @@
-console.log("Nvo");
+onsole.log("Nvo");
 jQuery(function ($) {
     $("#louvre_ticketbundle_booking_visitingDay").datepicker(
         {

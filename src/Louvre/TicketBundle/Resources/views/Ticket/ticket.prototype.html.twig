@@ -1,0 +1,12 @@
+<div class="formElements">
+    <span class="col-md-6">{{ form_row(ticket.lastname) }}</span><span class="col-md-6">{{ form_row(ticket.firstname) }}</span>
+</div>
+
+<div class="formElements">
+    <span class="col-md-6">{{ form_row(ticket.birthday) }}</span><span class="col-md-6"> {{ form_row(ticket.country,{'value' : 'FR'}) }}</span>
+</div>
+
+<div class="formDiscount">
+    {{ form_row(ticket.discount) }}
+</div>
+<hr class="hrTicket">

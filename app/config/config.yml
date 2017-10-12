@@ -37,6 +37,10 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    form_themes:
+        - 'bootstrap_3_layout.html.twig'
+    paths:
+        "%kernel.project_dir%/src/Louvre/TicketBundle/Resources/views": ticket
 
 # Doctrine Configuration
 doctrine:

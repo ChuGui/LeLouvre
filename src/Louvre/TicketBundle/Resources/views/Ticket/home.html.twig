@@ -5,43 +5,62 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-
-
+    <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/louvreticket/css/home.css') }}">
 {% endblock %}
 
 {% block body %}
-    {% block header %} Accueil {% endblock %}
-    <br>
-    <div class="danger alert-danger">
-        {% for flashMessage in app.session.flashbag.get('notice') %}
 
-            <span>{{ flashMessage }}Il ne reste plus que {{ remainingTicket }} billet(s) disponible(s) pour cette journée.</span>
+    <div class="well"><h3><strong style="text-decoration: underline">Tarification des billets</strong>:</h3>
+        <div class="alert alert-success">
+            <p><strong>Tarif normal</strong> (à partir de 12 ans) : 16€</p>
+            <p><strong>Tarif enfant</strong> (à partir de 4 ans jusqu'à 12 ans) : 8€</p>
+            <p><strong>Tarif senior</strong> (à partir de 60 ans) : 12€</p>
+            <p><strong>Tarif réduit</strong> (Étudiants, employé du musée ou d'un service du Ministère de la culture,
+                militaire) : 10€</p>
+            <p><strong>Gratuit</strong> pour les enfants de moins de 4 ans</p>
+            <p><i>ATTENTION! Une pièce justificative sera demandée à l'entrée du musée</i></p>
 
-        {% endfor %}
+        </div>
     </div>
-    <br>
-    <div class="well">
-        {{ form_start(formBooking, {'attr' : {'class' : 'form-inline', 'novalidate': 'novalidate'}}) }}
-        {{ form_row(formBooking.visitingDay, {'attr': {'id' : 'datepicker', 'name' : 'datepicker'}}) }}
-        <br>
-        <span id="infoNbTicket" class="alert alert-info fade in">Hello</span>
-        {{ form_row(formBooking.halfday) }}
-        <div class="well" id="ticketsForm" data-prototype="{{ form_widget(formBooking.tickets.vars.prototype)| e }}">
+
+    <h2 class="title">Choisissez vos billets</h2>
+    <hr>
+
+
+    {% for flashMessage in app.session.flashbag.get('missingDate') %}
+        <div class="alert alert-danger">
+            <span>{{ flashMessage }}</span>
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-danger">
+            <span>{{ flashMessage }}Il ne reste plus que {{ remainingTicket }} billet(s) disponible(s) pour cette journée.</span>
+        </div>
+    {% endfor %}
+
+    <div class="well" id="formWell">
+        <div class="topForm">
+            {{ form_start(formBooking, {'attr' : {'class' : 'form-inline', 'novalidate': 'novalidate'}}) }}
+            {{ form_row(formBooking.visitingDay, {'attr': {'id' : 'datepicker', 'name' : 'datepicker', 'placeholder' : 'JJ/MM/AAAA'}}) }}
+            <span id="infoNbTicket" class="alert alert-info fade in">Choisissez une date pour savoir le nombre de billets restants</span>
+            <p>{{ form_row(formBooking.halfday) }}</p>
+        </div>
+
+        <div class="well" id="ticketsForm" data-prototype="{{ form_widget(formBooking.tickets.vars.prototype)|e }}">
             {% for ticket in formBooking.tickets %}
                 <div id="ticket-{{ loop.index0 }}">
                     <h3>Billet n° {{ loop.index }}</h3>
-                    {{ form_widget(ticket) }}
-
+                    {{ form_row(ticket) }}
                 </div>
             {% endfor %}
         </div>
-        <a href="#" id="add_ticket" class="btn btn-default">Ajouter un billet</a>
-        {% do formBooking.url.setRendered %}
-        {% do formBooking.lastnameBooking.setRendered %}
-        {% do formBooking.firstnameBooking.setRendered %}
+        <div><a href="#" id="add_ticket" class="btn btn-success pull-left">Ajouter un
+                billet</a>{{ form_widget(formBooking.next,{'attr' :{'class':'btn btn-info pull-right'}}) }}</div>
+
         {{ form_end (formBooking) }}
+
     </div>
 
 {% endblock %}
@@ -53,8 +72,3 @@
         {#<script type="text/javascript" src="{{ asset('bundles/louvreticket/js/nbTicketsAvailable.js') }}"></script>#}
 
     {% endblock %}
-
-
-
-
-

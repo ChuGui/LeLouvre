@@ -1,5 +1,6 @@
 <?php
 namespace Louvre\TicketBundle\Form;
+use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -15,27 +16,13 @@ class BookingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('visitingDay', DateType::class, array(
-                'widget' => 'single_text',
-                'format' => 'dd-MM-yyyy',
-                'label' => 'Saisissez une date',
-                'required' => true,
-                'attr' => [
-                    'class' => 'js-datepicker',
-                    'html5' => false,
-                ]
-            ))
-            ->add('halfday', CheckboxType::class, array(
+            ->add('lastnameBooking', TextType::class, array(
                 'required' => false,
-                'label' => 'Cochez la case si vous voulez des billets pour la demi-journée  (après 14h00)'
+                'label' => "Nom"
             ))
-            ->add('tickets', CollectionType::class, array(
-                'entry_type' => TicketType::class,
-                'allow_add' => true,
-                'allow_delete' => true
-            ))
-            ->add('next', SubmitType::class, array(
-                'label' => 'Passer au paiement'
+            ->add('firstnameBooking', TextType::class, array(
+                'required' => false,
+                'label' => "Prénom"
             ));
     }
     /**
