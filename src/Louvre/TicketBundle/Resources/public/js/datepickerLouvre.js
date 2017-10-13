@@ -57,7 +57,7 @@ jQuery(function($)
                 var americanDate = $year + "-" + ($month+1) + "-" + $day;
                 $.ajax({
                     type:'GET',
-                    url:'http://localhost/LouvreP4/web/app_dev.php/remainingTicket?date=' + americanDate,
+                    url:'http://localhost/LeLouvre/web/app_dev.php/remainingTicket?date=' + americanDate,
                     dataType: 'JSON',
                     success: function(data)
                     {

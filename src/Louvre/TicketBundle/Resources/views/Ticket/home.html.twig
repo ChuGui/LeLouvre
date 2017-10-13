@@ -41,18 +41,16 @@
     {% endfor %}
 
     <div class="well" id="formWell">
-        <div class="topForm">
             {{ form_start(formBooking, {'attr' : {'class' : 'form-inline', 'novalidate': 'novalidate'}}) }}
             {{ form_row(formBooking.visitingDay, {'attr': {'id' : 'datepicker', 'name' : 'datepicker', 'placeholder' : 'JJ/MM/AAAA'}}) }}
             <span id="infoNbTicket" class="alert alert-info fade in">Choisissez une date pour savoir le nombre de billets restants</span>
             <p>{{ form_row(formBooking.halfday) }}</p>
-        </div>
 
-        <div class="well" id="ticketsForm" data-prototype="{{ form_widget(formBooking.tickets.vars.prototype)|e }}">
+        <div class="well" id="ticketsForm" data-prototype="{% filter escape %}{% include "@ticket/Ticket/ticket.prototype.html.twig" with {"ticket" : formBooking.tickets.vars.prototype} %}{% endfilter %}">
             {% for ticket in formBooking.tickets %}
-                <div id="ticket-{{ loop.index0 }}">
+                <div id="ticket-{{ loop.index0 }}" class="ticketForm">
                     <h3>Billet n° {{ loop.index }}</h3>
-                    {{ form_row(ticket) }}
+                    {% include "@ticket/Ticket/ticket.prototype.html.twig" with {"ticket" : ticket} %}
                 </div>
             {% endfor %}
         </div>

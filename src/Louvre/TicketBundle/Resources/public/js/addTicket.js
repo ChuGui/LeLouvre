@@ -1,12 +1,15 @@
 //php bin/console asset:install --symlink
 $(document).ready(function() {
+
+    $("#selectionBalise").addClass('active');
+
         // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
 
         var $container = $('#ticketsForm');
 
         // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
         var index = $container.children().length ;
-        console.log('index du billet est ' + index);
+        console.log('Le nombre d enfant de #ticketsForm est de ' + index);
 
         // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
         $('#add_ticket').click(function(e) {
