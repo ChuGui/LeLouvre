@@ -88,16 +88,17 @@ class TicketController extends Controller
         //Traitement du formulaire si le formulaire est envoyé
         if ($formIdentity->isSubmitted() && $formIdentity->isValid()) {
             //Request of Stripe
+            Stripe::setApiKey('sk_test_i8AYP4qMtuAMTkYOBH3uLhZR');
+            $token = $_POST['stripeToken'];
             try {
-                Stripe::setApiKey('sk_test_PtV6a44vvIpQAs8dv2OKWNNy');
-                $token = $_POST['stripeToken'];
                 //Charge the user's card
                 $charge = Charge::create(array(
                     "amount" => $chargeCents,
                     "currency" => "eur",
-                    "description" => "Achat billet Louvre",
                     "source" => $token,
+                    "description" => "Paiement Stripe - Achat billet Louvre",
                 ));
+                $this->addFlash("success","Félicitation la transaction à correctement été éffectuée !");
             } catch (\Stripe\Error\Card $e) {
                 $body = $e->getJsonBody();
                 $err = $body['error'];
@@ -107,20 +108,6 @@ class TicketController extends Controller
                 // param is '' in this case
                 print('Param is:' . $err['param'] . "\n");
                 print('Message is:' . $err['message'] . "\n");
-            } catch (\Stripe\Error\RateLimit $e) {
-                // Too many requests made to the API too quickly
-            } catch (\Stripe\Error\InvalidRequest $e) {
-                // Invalid parameters were supplied to Stripe's API
-            } catch (\Stripe\Error\Authentication $e) {
-                // Authentication with Stripe's API failed
-                // (maybe you changed API keys recently)
-            } catch (\Stripe\Error\ApiConnection $e) {
-                // Network communication with Stripe failed
-            } catch (\Stripe\Error\Base $e) {
-                // Display a very generic error to the user, and maybe send
-                // yourself an email
-            } catch (Exception $e) {
-                // Something else happened, completely unrelated to Stripe
             }
             //Récupération de stripe token pour récupérer l'email
             $stripeinfo = \Stripe\Token::retrieve($token);
@@ -128,8 +115,8 @@ class TicketController extends Controller
 
             //Hydratation manuelle de $booking avec booking session
             $booking->setUrl($userEmail);
-            $booking->setLastnameBooking($bookingSession->getLastnameBooking());
-            $booking->setFirstnameBooking($bookingSession->getFirstnameBooking());
+            $booking->setLastnameBooking($booking->getLastnameBooking());
+            $booking->setFirstnameBooking($booking->getFirstnameBooking());
             $booking->setVisitingDay($bookingSession->getVisitingDay());
             $booking->setTotalPrice($totalPriceOfBookingSession);
             $booking->setHalfDay($bookingSession->getHalfDay());
@@ -141,14 +128,15 @@ class TicketController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($booking);
             $em->flush();
+
             $message = (new \Swift_Message('Vos billets pour le Louvre'))
                 ->setFrom(array('chugustudio@gmail.com' => "Le Louvre"))
                 ->setTo($userEmail)
                 ->setCharset('utf-8')
                 ->setContentType('text/html')
-                ->setBody($this->renderView('LouvreTicketBundle:Emails:email.html.twig', array(
+                ->setBody($this->renderView('LouvreTicketBundle:Mail:email.html.twig', array(
                     'allTickets' => $allTickets,
-                    'bookingSession' => $bookingSession
+                    'booking' => $booking
                 )));
             $this->container->get('mailer')->send($message);
             $request->getSession()->getFlashBag()->add('success', 'Booking à bien enregistré.');

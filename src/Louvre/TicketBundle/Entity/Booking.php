@@ -272,6 +272,8 @@ class Booking
     public function __construct()
     {
         $this->tickets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->buyingDay = new \DateTime();
+        $this->bookingCode = substr(md5(uniqid(mt_rand(), true)) , 0, 8);
     }
 
     /**
