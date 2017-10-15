@@ -11,7 +11,7 @@
 
     <div>
         <p>Nom: {{ ticket.firstname }} {{ ticket.lastname }}</p>
-        <p>Ticket valable pour le : {{ booking.visitingDay }}</p>
+        <p>Ticket valable pour le : {{ booking.visitingDay|date('d-m-Y') }}</p>
     </div>
     <br>
 

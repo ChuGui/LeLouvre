@@ -123,7 +123,6 @@ class TicketController extends Controller
             $allTickets = $bookingSession->getTickets();
             foreach ($allTickets as $ticket) {
                 $booking->addTicket($ticket);
-                var_dump($ticket);
             }
             $em = $this->getDoctrine()->getManager();
             $em->persist($booking);
