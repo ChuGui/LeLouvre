@@ -11,11 +11,10 @@
                 {{ flash_message }}
             </div>
         {% endfor %}
-        <ul>
-            <li>Validation de paiement avec résumé</li>
-            <li>envois email avec billets SwiftMailer</li>
-        </ul>
 
     </div>
 {% endblock %}
-
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/louvreticket/js/recap.js') }}"></script>
+{% endblock %}

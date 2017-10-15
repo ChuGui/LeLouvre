@@ -10,9 +10,8 @@
 {% for ticket in allTickets %}
 
     <div>
-        <p>Nom: {{ ticket.firstname }}</p>
-
-
+        <p>Nom: {{ ticket.firstname }} {{ ticket.lastname }}</p>
+        <p>Ticket valable pour le : {{ booking.visitingDay }}</p>
     </div>
     <br>
 
