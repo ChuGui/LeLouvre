@@ -74,6 +74,7 @@ class TicketController extends Controller
     {
         //Appel de la session récupération de l'objet booking de type Booking
         $bookingSession = $this->get('session')->get('booking');
+
         $booking = new Booking();
 
         //Création du formulaire à partir de l'objet $booking instance de Booking
