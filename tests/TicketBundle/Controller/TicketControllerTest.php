@@ -1,18 +1,20 @@
 <?php
 
-namespace Tests\AppBundle\Controller;
+namespace Tests\Louvre\TicketBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class DefaultControllerTest extends WebTestCase
+class TicketControllerTest extends WebTestCase
 {
-    public function testIndex()
+    public function testHome()
     {
         $client = static::createClient();
 
         $crawler = $client->request('GET', '/');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('Welcome to Symfony', $crawler->filter('#container h1')->text());
+        $this->assertContains('Tarification', $crawler->filter('h3')->text());
+
     }
+
 }
