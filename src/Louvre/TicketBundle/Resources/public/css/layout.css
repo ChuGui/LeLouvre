@@ -13,8 +13,7 @@ body {
 
 }
 
-.well
-{
+.well {
     background-color: rgba(253, 253, 253, 0.88);
 }
 
@@ -58,6 +57,21 @@ body {
 .title {
     color: #FFFFFF;
     text-shadow: -1px 0 grey, 0 1px grey, 1px 0 grey, 0 -1px grey;
+}
+
+footer > p {
+    margin: 0 auto;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: large;
+    background-color: rgba(256, 256, 256, .7);
+    width: 75%;
+    border-radius: 3px;
+}
+
+footer > a
+{
+    color:#0a93a6; text-decoration:none;
 }
 
 @media screen and (max-width: 1095px) {

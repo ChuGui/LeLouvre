@@ -1,0 +1,60 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Recap{% endblock %}
+    {% block header %} Erreur 404 {% endblock %}
+{% block body %}
+
+
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="error-template">
+                    <h1>
+                        Oops!</h1>
+                    <h2>
+                        404 page introuvable</h2>
+                    <div class="error-details">
+                        Désolé, il semble que cette page n'existe pas.
+                    </div>
+                    <div class="error-actions">
+                        <a href="{{ path('louvre_ticket_homepage') }}" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
+                            Retour à la page d'accueil </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Recap{% endblock %}
+    {% block header %} Erreur 404 {% endblock %}
+{% block body %}
+
+
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="error-template">
+                    <h1>
+                        Oops!</h1>
+                    <h2>
+                        Erreur</h2>
+                    <div class="error-details">
+                        Désolé, Une erreur est survenu.
+                    </div>
+                    <div class="error-actions">
+                        <a href="{{ path('louvre_ticket_homepage') }}" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
+                            Retour à la page d'accueil </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

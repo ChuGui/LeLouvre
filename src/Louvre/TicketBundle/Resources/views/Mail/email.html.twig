@@ -1,18 +1,18 @@
 {#<h1>Bonjour {{ prenomAcheteur }} {{ nomAcheteur }}</h1>#}
 
-<h2>Bonjour {{ booking.firstnameBooking }} {{ booking.lastnameBooking }}, voici vos billets pour le Louvre</h2>
+<h2>Bonjour {{ booking.firstnameBooking }} {{ booking.lastnameBooking }}, voici vos billets pour le Louvre.</h2>
 
-<p>Ils seront à présenter au guichet du Louvre en guise de preuve d'achat, avec les justificatifs necessaires si une réduction
-    est appliquée</p>
+<p>Ils seront à présenter au guichet du Louvre en guise de preuve d'achat, avec les justificatifs necessaires si une réduction doit être appliquée.</p>
 
 <p>Numéro de réservation : {{ booking.bookingCode }}</p>
 <p>Prix total de la commande : {{ booking.totalPrice }}</p>
-{% for ticket in allTickets %}
 
-    <div>
+{% for ticket in allTickets %}
+    <hr>
         <p>Nom: {{ ticket.firstname }} {{ ticket.lastname }}</p>
         <p>Ticket valable pour le : {{ booking.visitingDay|date('d-m-Y') }}</p>
-    </div>
     <br>
+    <hr>
+
 
 {% endfor %}

@@ -17,3 +17,33 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
+
+
+     /--WEB--/
+
+   parameters:
+       database_host: chugufresk22.mysql.db
+       database_port: 3306
+       database_name: chugufresk22
+       database_user: chugufresk22
+       database_password: HorniHorni04
+       mailer_user: chugustudio@gmail.com
+       mailer_password: '#orni#orni0478'
+       mailer_host: smtp.gmail.com
+       mailer_transport: gmail
+       secret: 3ba6a26c85930e51d028e02a243796d3912d333d
+
+
+    /--LOCAL--/
+
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: LeLouvre
+    database_user: root
+    database_password: null
+    mailer_user: chugustudio@gmail.com
+    mailer_password: '#orni#orni0478'
+    mailer_host: smtp.gmail.com
+    mailer_transport: gmail
+    secret: 3ba6a26c85930e51d028e02a243796d3912d333d
