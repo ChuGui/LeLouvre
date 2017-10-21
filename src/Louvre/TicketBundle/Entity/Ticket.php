@@ -3,6 +3,7 @@
 namespace Louvre\TicketBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Ticket
@@ -25,6 +26,8 @@ class Ticket
      * @var string
      *
      * @ORM\Column(name="lastname", type="string", length=255)
+     * @Assert\Length(min=2, message="Le nom doit comporter au moins 2 lettres")
+     * @Assert\Regex(pattern="/\d/", match=false, message="Votre nom ne doit pas contenir de chiffre"
      */
     private $lastname;
 
@@ -32,6 +35,8 @@ class Ticket
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255)
+     * @Assert\Length(min=2, message="Votre prénom doit comporter au moins 2 lettres")
+     * @Assert\Regex(pattern="/\d/", match=false, message="Votre prénom ne doit pas contenir de chiffre"
      */
     private $firstname;
 
@@ -39,6 +44,7 @@ class Ticket
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
+     * @Assert\DateTime()
      */
     private $date;
 
@@ -53,6 +59,7 @@ class Ticket
      * @var \DateTime
      *
      * @ORM\Column(name="birthday", type="datetime")
+     * @Assert\DateTime()
      */
     private $birthday;
 

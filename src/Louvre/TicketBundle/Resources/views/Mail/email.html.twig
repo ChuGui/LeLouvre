@@ -1,11 +1,11 @@
 {#<h1>Bonjour {{ prenomAcheteur }} {{ nomAcheteur }}</h1>#}
-<img src="{{ logoUrl }}" alt="LeLouvre">
+<img src="{{ logoUrl }}" alt="LeLouvre" style="width: 25%; height: 25%">
 <h2>Bonjour {{ booking.firstnameBooking }} {{ booking.lastnameBooking }}, voici vos billets pour le Louvre.</h2>
 
 <p>Ils seront à présenter au guichet du Louvre en guise de preuve d'achat, avec les justificatifs necessaires si une réduction doit être appliquée.</p>
 
-<p>Numéro de réservation : {{ booking.bookingCode }}</p>
-<p>Prix total de la commande : {{ booking.totalPrice }}</p>
+<p><strong>Numéro de réservation :</strong> {{ booking.bookingCode }}</p>
+<p><strong>Prix total de la commande :</strong> {{ booking.totalPrice }}€</p>
 
 {% for ticket in allTickets %}
 
@@ -17,10 +17,12 @@
     border-radius: 3px;
     border-style: groove;
 ">
-        <p>Nom: {{ ticket.firstname }} {{ ticket.lastname }}</p>
-        <p>Ticket valable pour le : {{ booking.visitingDay|date('d-m-Y') }}</p>
+        <p><strong>Nom, Prénom:</strong> {{ ticket.firstname }} {{ ticket.lastname }}</p>
+        <p><strong>Date de naissance:</strong> {{ ticket.birthday |date("d-m-Y")}}</p>
+        <p><strong>Prix:</strong>{{ ticket.price }} €</p>
+        <p><strong>Ticket valable pour le :</strong> {{ booking.visitingDay|date('d-m-Y') }}</p>
         {% if ticket.discount == true %}
-            Réduction : Oui - Pièce justificative à présenter au guichet
+            <strong>Réduction :</strong> Oui - Pièce justificative à présenter au guichet
         {% endif %}
     </div>
     <br>
