@@ -129,15 +129,22 @@ class TicketController extends Controller
             $em->persist($booking);
             $em->flush();
 
-            $message = (new \Swift_Message('Vos billets pour le Louvre'))
+
+
+            $message = (new \Swift_Message('Vos billets pour le Louvre'));
+            $logoUrl = $message->embed(\Swift_Image::fromPath('bundles/louvreticket/img/louvreLogo.jpg'));
+            $message
                 ->setFrom(array('chugustudio@gmail.com' => "Le Louvre"))
                 ->setTo($userEmail)
                 ->setCharset('utf-8')
                 ->setContentType('text/html')
                 ->setBody($this->renderView('LouvreTicketBundle:Mail:email.html.twig', array(
                     'allTickets' => $allTickets,
-                    'booking' => $booking
-                )));
+                    'booking' => $booking,
+                    'logoUrl' => $logoUrl
+                )), 'text/html');
+
+
             $this->container->get('mailer')->send($message);
             $request->getSession()->getFlashBag()->add('success', 'Booking à bien enregistré.');
             return $this->redirectToRoute('louvre_ticket_recap');

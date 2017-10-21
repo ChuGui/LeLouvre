@@ -1,5 +1,5 @@
 {#<h1>Bonjour {{ prenomAcheteur }} {{ nomAcheteur }}</h1>#}
-
+<img src="{{ louvreLogo }}" alt="LeLouvre">
 <h2>Bonjour {{ booking.firstnameBooking }} {{ booking.lastnameBooking }}, voici vos billets pour le Louvre.</h2>
 
 <p>Ils seront à présenter au guichet du Louvre en guise de preuve d'achat, avec les justificatifs necessaires si une réduction doit être appliquée.</p>
@@ -8,9 +8,21 @@
 <p>Prix total de la commande : {{ booking.totalPrice }}</p>
 
 {% for ticket in allTickets %}
-    <hr>
+
+
+    <div style="
+    margin: 0 auto;
+    text-align: center;
+    width: 75%;
+    border-radius: 3px;
+    border-style: groove;
+">
         <p>Nom: {{ ticket.firstname }} {{ ticket.lastname }}</p>
         <p>Ticket valable pour le : {{ booking.visitingDay|date('d-m-Y') }}</p>
+        {% if ticket.discount == true %}
+            Réduction : Oui - Pièce justificative à présenter au guichet
+        {% endif %}
+    </div>
     <br>
     <hr>
 
