@@ -2,9 +2,10 @@
 <img src="{{ logoUrl }}" alt="LeLouvre" style="width: 25%; height: 25%">
 <h2>Bonjour {{ booking.firstnameBooking }} {{ booking.lastnameBooking }}, voici vos billets pour le Louvre.</h2>
 
-<p>Ils seront à présenter au guichet du Louvre en guise de preuve d'achat, avec les justificatifs necessaires si une réduction doit être appliquée.</p>
+<p>Ils seront à présenter au guichet du Louvre en guise de preuve d'achat <p>
+<p><i>ATTENTION! Une pièce justificative sera demandée à l'entrée du musée, pour touts les tarifs réduits. Une carte d'identitée avec date de naissance est obligatoire.</i></p>
 
-<p><strong>Numéro de réservation :</strong> {{ booking.bookingCode }}</p>
+<p><strong>Numéro de la réservation :</strong> {{ booking.bookingCode }}</p>
 <p><strong>Prix total de la commande :</strong> {{ booking.totalPrice }}€</p>
 
 {% for ticket in allTickets %}
@@ -20,7 +21,7 @@
         <p><strong>Nom, Prénom:</strong> {{ ticket.firstname }} {{ ticket.lastname }}</p>
         <p><strong>Date de naissance:</strong> {{ ticket.birthday |date("d-m-Y")}}</p>
         <p><strong>Prix:</strong>{{ ticket.price }} €</p>
-        <p><strong>Ticket valable pour le :</strong> {{ booking.visitingDay|date('d-m-Y') }}</p>
+        <p><strong>Billet valable pour le :</strong> {{ booking.visitingDay|date('d-m-Y') }}</p>
         {% if ticket.discount == true %}
             <strong>Réduction :</strong> Oui - Pièce justificative à présenter au guichet
         {% endif %}

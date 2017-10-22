@@ -101,14 +101,8 @@ class TicketController extends Controller
                 ));
                 $this->addFlash("success","Félicitation la transaction à correctement été éffectuée !");
             } catch (\Stripe\Error\Card $e) {
-                $body = $e->getJsonBody();
-                $err = $body['error'];
-                print('Status is:' . $e->getHttpStatus() . "\n");
-                print('Type is:' . $err['type'] . "\n");
-                print('Code is:' . $err['code'] . "\n");
-                // param is '' in this case
-                print('Param is:' . $err['param'] . "\n");
-                print('Message is:' . $err['message'] . "\n");
+                $this->get('session')->getFlashBag()->add('notice', "Une erreur est survenue lors du paiement. Veuillez réessayer avec une autre carte bancaire, ou contacter votre banque. Aucun prélévement n'a été éffectué sur votre compte bancaire");
+                return $this->render('LouvreTicketBundle:Ticket:home.html.twig');
             }
             //Récupération de stripe token pour récupérer l'email
             $stripeinfo = \Stripe\Token::retrieve($token);
@@ -146,7 +140,7 @@ class TicketController extends Controller
 
 
             $this->container->get('mailer')->send($message);
-            $request->getSession()->getFlashBag()->add('success', 'Booking à bien enregistré.');
+            $request->getSession()->getFlashBag()->add('success', 'Félicitations, votre commande a correctement été enregistrée.');
             return $this->redirectToRoute('louvre_ticket_recap');
         }//Fin du traitement du formulaire
 

@@ -34,8 +34,8 @@ class Booking
      * @var string
      *
      * @ORM\Column(name="lastnameBooking", type="string", length=255)
-     * @Assert\Length(min=2, message="Votre nom doit comporter au moins 2 lettres")
-     * @Assert\Regex(pattern="/\d/", match=false, message="Votre nom ne doit pas contenir de chiffre"
+     * @Assert\Length(min=2, minMessage="Votre nom doit comporter au moins 2 lettres")
+     * @Assert\Regex(pattern="/\d/", match=false, message="Votre nom ne doit pas contenir de chiffre")
      */
     private $lastnameBooking;
 
@@ -43,8 +43,8 @@ class Booking
      * @var string
      *
      * @ORM\Column(name="firstnameBooking", type="string", length=255)
-     * @Assert\Length(min=2, message="Votre prénom doit comporter au moins 2 lettres")
-     * @Assert\Regex(pattern="/\d/", match=false, message="Votre prénom ne doit pas contenir de chiffre"
+     * @Assert\Length(min=2, minMessage="Votre prénom doit comporter au moins 2 lettres")
+     * @Assert\Regex(pattern="/\d/", match=false, message="Votre prénom ne doit pas contenir de chiffre")
      */
     private $firstnameBooking;
 
